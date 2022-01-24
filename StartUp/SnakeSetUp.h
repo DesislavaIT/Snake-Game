@@ -1,5 +1,6 @@
 #pragma once
 #include "Constants.h"
+#include "ConsoleSetUp.h"
 
 int** ResizeSnake(int** snake, int& length)
 {
@@ -24,4 +25,13 @@ int** ResizeSnake(int** snake, int& length)
 	delete[] snake;
 
 	return newSnake;
+}
+
+void ShowSnake(int** snake, int& length)
+{
+	for (int i = 0; i < length; i++)
+	{
+		SetCursor(snake[i][0], snake[i][1]);
+		cout << '$';
+	}
 }
