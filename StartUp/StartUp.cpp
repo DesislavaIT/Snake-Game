@@ -1,34 +1,25 @@
 ﻿#include <iostream>
 #include "ConsoleSetUp.h"
+#include "SnakeSetUp.h"
 
 using namespace std;
 
 int main()
 {
+	HideScrollBar();
 	SetConsoleSize();
 	MakeConsoleUnresizable();
 	SetName();
+	PrintFrame();
 
-	for (int i = 0; i < CONSOLE_WIDTH; i++)
+	int length = 5;// initial length = 5;
+	int** snake = new int* [SNAKE_LENGTH];
+	for (int i = 0; i < 5; i++)
 	{
-		cout << '*';
-	}
-	cout << endl;
-
-	for (int j = 0; j < CONSOLE_HEIGHT - 2; j++)
-	{
-		cout << '*';
-		for (int i = 0; i < CONSOLE_WIDTH - 2; i++)
-		{
-			cout << ' ';
-		}
-		cout << '*' << endl;
+		snake[i] = new int[2];// for x & y
 	}
 
-	for (int i = 0; i < CONSOLE_WIDTH; i++)
-	{
-		cout << '*';
-	}
+	snake[5] = nullptr;
 
 	return 0;
 }
