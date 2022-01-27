@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include "ConsoleSetUp.h"
 #include "SnakeSetUp.h"
+#include <conio.h>
 
 using namespace std;
 
@@ -21,12 +22,6 @@ int main()
 
 	snake[5] = nullptr;
 
-	int direction = 1; //initial direction is right
-	//1 = right
-	//2 = down
-	//3 = left
-	//4 = up
-
 	for (int i = length - 1, j = 0; i >= 0; i--, j++)
 	{
 		snake[i][0] = j + 1;
@@ -36,43 +31,52 @@ int main()
 	ShowSnake(snake, length);
 	int counter = 1;
 
+	char key = KEY_RIGHT; //initial direction is right
+	char oldKey = key; //initial direction is right
 	while (true)
 	{
-		switch (direction)
+		if (_kbhit())
 		{
-		case 1:
-			MoveRight(snake, length);
-			break;
-		case 2:
-			MoveDown(snake, length);
-			break;
-		case 3:
-			MoveLeft(snake, length);
-			break;
-		case 4:
-			MoveUp(snake, length);
-			break;
-		}
-		ShowSnake(snake, length);
-		Sleep(500);
-		counter++;
-		if (counter > 10 && counter <= 20)
-		{
-			direction = 2;
-		}
-		if (counter > 20 && counter <= 30)
-		{
-			direction = 3;
-		}
-		if (counter > 30 && counter <= 40)
-		{
-			direction = 4;
+			oldKey = key;
+			key = _getch();
 		}
 
-		if (counter > 40)
+		switch (key)
 		{
+		case KEY_RIGHT:
+			MoveRight(snake, length);
 			break;
+		case KEY_DOWN:
+			MoveDown(snake, length);
+			break;
+		case KEY_LEFT:
+			MoveLeft(snake, length);
+			break;
+		case KEY_UP:
+			MoveUp(snake, length);
+			break;
+		default:
+			key = oldKey;
+			continue;
 		}
+
+		//Check if snake hit the boundaries
+		if (snake[0][0] == 0 || snake[0][0] == CONSOLE_WIDTH - 1 || snake[0][1] == 0 || snake[0][1] == CONSOLE_HEIGHT - 1)
+		{
+			return 0;
+		}
+
+		//Check if snake bite itself
+		for (int i = 1; i < length; i++)
+		{
+			if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1])
+			{
+				return 0;
+			}
+		}
+
+		ShowSnake(snake, length);
+		Sleep(200);
 	}
 
 	for (int i = 0; i < length; i++)
