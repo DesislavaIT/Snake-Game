@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cstdlib> 
 #include "ConsoleSetUp.h"
 #include "SnakeSetUp.h"
 #include <conio.h>
@@ -106,7 +107,7 @@ int main()
 		if (snake[0][0] == 0 || snake[0][0] == CONSOLE_WIDTH - 1 || snake[0][1] == 0 || snake[0][1] == CONSOLE_HEIGHT - 1)
 		{
 			MessageBox(nullptr, TEXT("Game over!"), TEXT("Hit the boundaries!"), MB_OK);
-			return 0;
+			exit(0);
 		}
 
 		//Check if snake bite itself
@@ -115,7 +116,7 @@ int main()
 			if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1])
 			{
 				MessageBox(nullptr, TEXT("Game over!"), TEXT("Bite itself!"), MB_OK);
-				return 0;
+				exit(0);
 			}
 		}
 
