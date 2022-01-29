@@ -50,6 +50,15 @@ void SetCursor(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+void MakeCursorInvisible()
+{
+	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO ci;
+	ci.dwSize = 100;
+	ci.bVisible = FALSE;
+	SetConsoleCursorInfo(output, &ci);
+}
+
 void PrintFrame()
 {
 	for (int i = 0; i < CONSOLE_WIDTH; i++)

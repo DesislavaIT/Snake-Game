@@ -12,6 +12,7 @@ int main()
 	MakeConsoleUnresizable();
 	SetName();
 	PrintFrame();
+	MakeCursorInvisible();
 
 	int length = 5;// initial length = 5;
 	int** snake = new int* [SNAKE_LENGTH];
@@ -39,6 +40,26 @@ int main()
 		{
 			oldKey = key;
 			key = _getch();
+		}
+
+		if (oldKey == KEY_RIGHT && key == KEY_LEFT)
+		{
+			key = oldKey;
+		}
+
+		if (oldKey == KEY_LEFT && key == KEY_RIGHT)
+		{
+			key = oldKey;
+		}
+
+		if (oldKey == KEY_DOWN && key == KEY_UP)
+		{
+			key = oldKey;
+		}
+
+		if (oldKey == KEY_UP && key == KEY_DOWN)
+		{
+			key = oldKey;
 		}
 
 		switch (key)
