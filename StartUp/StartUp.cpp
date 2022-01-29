@@ -34,6 +34,7 @@ int main()
 
 	char key = KEY_RIGHT; //initial direction is right
 	char oldKey = key; //initial direction is right
+	bool oppositeMessageShown = false;
 	while (true)
 	{
 		if (_kbhit())
@@ -45,21 +46,41 @@ int main()
 		if (oldKey == KEY_RIGHT && key == KEY_LEFT)
 		{
 			key = oldKey;
+			if (!oppositeMessageShown)
+			{
+				oppositeMessageShown = true;
+				MessageBox(nullptr, TEXT("You can't go in the opposite direction!"), TEXT("Attention"), MB_OK);
+			}
 		}
 
 		if (oldKey == KEY_LEFT && key == KEY_RIGHT)
 		{
 			key = oldKey;
+			if (!oppositeMessageShown)
+			{
+				oppositeMessageShown = true;
+				MessageBox(nullptr, TEXT("You can't go in the opposite direction!"), TEXT("Attention"), MB_OK);
+			}
 		}
 
 		if (oldKey == KEY_DOWN && key == KEY_UP)
 		{
 			key = oldKey;
+			if (!oppositeMessageShown)
+			{
+				oppositeMessageShown = true;
+				MessageBox(nullptr, TEXT("You can't go in the opposite direction!"), TEXT("Attention"), MB_OK);
+			}
 		}
 
 		if (oldKey == KEY_UP && key == KEY_DOWN)
 		{
 			key = oldKey;
+			if (!oppositeMessageShown)
+			{
+				oppositeMessageShown = true;
+				MessageBox(nullptr, TEXT("You can't go in the opposite direction!"), TEXT("Attention"), MB_OK);
+			}
 		}
 
 		switch (key)
@@ -84,6 +105,7 @@ int main()
 		//Check if snake hit the boundaries
 		if (snake[0][0] == 0 || snake[0][0] == CONSOLE_WIDTH - 1 || snake[0][1] == 0 || snake[0][1] == CONSOLE_HEIGHT - 1)
 		{
+			MessageBox(nullptr, TEXT("Game over!"), TEXT("Hit the boundaries!"), MB_OK);
 			return 0;
 		}
 
@@ -92,6 +114,7 @@ int main()
 		{
 			if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1])
 			{
+				MessageBox(nullptr, TEXT("Game over!"), TEXT("Bite itself!"), MB_OK);
 				return 0;
 			}
 		}
