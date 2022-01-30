@@ -111,3 +111,8 @@ void MoveUp(int** snake, int length)
 
 	snake[0][1] = newY;
 }
+
+void ExtendSnake(int** snake, int length)
+{
+	int addElementIndex = length - 1;
+}

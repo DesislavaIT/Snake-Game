@@ -29,5 +29,8 @@
     <ClInclude Include="SnakeSetUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FoodSetUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

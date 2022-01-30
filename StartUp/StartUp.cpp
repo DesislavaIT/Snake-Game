@@ -2,6 +2,7 @@
 #include <cstdlib> 
 #include "ConsoleSetUp.h"
 #include "SnakeSetUp.h"
+#include "FoodSetUp.h"
 #include <conio.h>
 
 using namespace std;
@@ -31,11 +32,25 @@ int main()
 	}
 
 	ShowSnake(snake, length);
-	int counter = 1;
-
 	char key = KEY_RIGHT; //initial direction is right
 	char oldKey = key; //initial direction is right
 	bool oppositeMessageShown = false;
+	int food[2];
+	int x = rand() % CONSOLE_WIDTH + 1;
+	while (!CheckFoodX(snake, length, x))
+	{
+		x = rand() % CONSOLE_WIDTH + 1;
+	}
+
+	int y = rand() % CONSOLE_HEIGHT + 1;
+	while (!CheckFoodY(snake, length, y))
+	{
+		y = rand() % CONSOLE_HEIGHT + 1;
+	}
+
+	food[0] = x;
+	food[1] = y;
+	ShowFood(food);
 	while (true)
 	{
 		if (_kbhit())
@@ -107,6 +122,12 @@ int main()
 		if (snake[0][0] == 0 || snake[0][0] == CONSOLE_WIDTH - 1 || snake[0][1] == 0 || snake[0][1] == CONSOLE_HEIGHT - 1)
 		{
 			MessageBox(nullptr, TEXT("Game over!"), TEXT("Hit the boundaries!"), MB_OK);
+			for (int i = 0; i < length; i++)
+			{
+				delete[] snake[i];
+			}
+
+			delete[] snake;
 			exit(0);
 		}
 
@@ -116,8 +137,40 @@ int main()
 			if (snake[0][0] == snake[i][0] && snake[0][1] == snake[i][1])
 			{
 				MessageBox(nullptr, TEXT("Game over!"), TEXT("Bite itself!"), MB_OK);
+				for (int i = 0; i < length; i++)
+				{
+					delete[] snake[i];
+				}
+
+				delete[] snake;
 				exit(0);
 			}
+		}
+
+		if (CheckIfFoodEaten(snake, length, food))
+		{
+			x = rand() % CONSOLE_WIDTH + 1;
+			while (!CheckFoodX(snake, length, x))
+			{
+				x = rand() % CONSOLE_WIDTH + 1;
+			}
+
+			y = rand() % CONSOLE_HEIGHT + 1;
+			while (!CheckFoodY(snake, length, y))
+			{
+				y = rand() % CONSOLE_HEIGHT + 1;
+			}
+
+			food[0] = x;
+			food[1] = y;
+			ShowFood(food);
+			length++;
+			if (length % SNAKE_LENGTH == 0)
+			{
+				snake = ResizeSnake(snake, length);
+			}
+
+			ExtendSnake(snake, length);
 		}
 
 		ShowSnake(snake, length);
