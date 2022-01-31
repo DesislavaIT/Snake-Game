@@ -4,6 +4,7 @@
 #include "SnakeSetUp.h"
 #include "FoodSetUp.h"
 #include <conio.h>
+#include <time.h>
 
 using namespace std;
 
@@ -16,9 +17,10 @@ int main()
 	PrintFrame();
 	MakeCursorInvisible();
 
+	int timeSleep = 200;
 	int length = 5;// initial length = 5;
 	int** snake = new int* [SNAKE_LENGTH];
-	for (int i = 0; i < length; i++)
+	for (int i = 0; i < SNAKE_LENGTH; i++)
 	{
 		snake[i] = new int[2];// for x & y
 	}
@@ -36,6 +38,7 @@ int main()
 	char oldKey = key; //initial direction is right
 	bool oppositeMessageShown = false;
 	int food[2];
+	/*srand(time(0));
 	int x = rand() % CONSOLE_WIDTH + 1;
 	while (!CheckFoodX(snake, length, x))
 	{
@@ -50,7 +53,9 @@ int main()
 
 	food[0] = x;
 	food[1] = y;
-	ShowFood(food);
+	ShowFood(food);*/
+	GenerateNewFood(snake, length, food);
+	int changeFood = 0;
 	while (true)
 	{
 		if (_kbhit())
@@ -99,6 +104,9 @@ int main()
 			}
 		}
 
+		int lastSnakePart[2];
+		lastSnakePart[0] = snake[length - 1][0];
+		lastSnakePart[1] = snake[length - 1][1];
 		switch (key)
 		{
 		case KEY_RIGHT:
@@ -149,7 +157,8 @@ int main()
 
 		if (CheckIfFoodEaten(snake, length, food))
 		{
-			x = rand() % CONSOLE_WIDTH + 1;
+			changeFood = 0;
+			/*x = rand() % CONSOLE_WIDTH + 1;
 			while (!CheckFoodX(snake, length, x))
 			{
 				x = rand() % CONSOLE_WIDTH + 1;
@@ -163,18 +172,27 @@ int main()
 
 			food[0] = x;
 			food[1] = y;
-			ShowFood(food);
+			ShowFood(food);*/
+			GenerateNewFood(snake, length, food);
 			length++;
 			if (length % SNAKE_LENGTH == 0)
 			{
 				snake = ResizeSnake(snake, length);
 			}
 
-			ExtendSnake(snake, length);
+			ExtendSnake(snake, length, lastSnakePart);
+			timeSleep -= 4;
 		}
 
+		changeFood++;
+		if (changeFood == 100)
+		{
+			SetCursor(food[0], food[1]);
+			std::cout << ' ';
+			GenerateNewFood(snake, length, food);
+		}
 		ShowSnake(snake, length);
-		Sleep(200);
+		Sleep(timeSleep);
 	}
 
 	for (int i = 0; i < length; i++)

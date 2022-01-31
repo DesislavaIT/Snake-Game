@@ -2,12 +2,11 @@
 #include "Constants.h"
 #include "ConsoleSetUp.h"
 
-int** ResizeSnake(int** snake, int& length)
+int** ResizeSnake(int** snake, int length)
 {
-	int oldLength = length;
-	length += SNAKE_LENGTH;
-	int** newSnake = new int* [length];
-	for (int i = 0; i < oldLength; i++)
+	int newLength = length + SNAKE_LENGTH;
+	int** newSnake = new int* [newLength];
+	for (int i = 0; i < length - 1; i++)
 	{
 		newSnake[i] = new int[2];
 		for (int j = 0; j < 2; j++)
@@ -16,8 +15,7 @@ int** ResizeSnake(int** snake, int& length)
 		}
 	}
 
-	snake[oldLength] = nullptr;
-	for (int i = 0; i < oldLength; i++)
+	for (int i = 0; i < length - 1; i++)
 	{
 		delete[] snake[i];
 	}
@@ -112,7 +110,11 @@ void MoveUp(int** snake, int length)
 	snake[0][1] = newY;
 }
 
-void ExtendSnake(int** snake, int length)
+void ExtendSnake(int** snake, int length, int lastSnakePart[2])
 {
 	int addElementIndex = length - 1;
+	snake[addElementIndex] = new int[2];
+	snake[addElementIndex][0] = lastSnakePart[0];
+	snake[addElementIndex][1] = lastSnakePart[1];
+	snake[length] = nullptr;
 }
