@@ -4,7 +4,7 @@
 
 bool CheckFoodX(int** snake, int length, int x)
 {
-	if (x == 0 || x == CONSOLE_WIDTH - 1)
+	if (x <= 0 || x >= CONSOLE_WIDTH - 1)
 	{
 		return false;
 	}
@@ -22,7 +22,7 @@ bool CheckFoodX(int** snake, int length, int x)
 
 bool CheckFoodY(int** snake, int length, int y)
 {
-	if (y == 0 || y == CONSOLE_HEIGHT - 1)
+	if (y <= 0 || y >= CONSOLE_HEIGHT - 1)
 	{
 		return false;
 	}
@@ -40,8 +40,9 @@ bool CheckFoodY(int** snake, int length, int y)
 
 void ShowFood(int food[2])
 {
+	SetConsoleTextAttribute(handle, 12);
 	SetCursor(food[0], food[1]);
-	std::cout << 'F';
+	std::cout << (char)(254);
 }
 
 bool CheckIfFoodEaten(int** snake, int length, int food[2])

@@ -6,3 +6,4 @@
 #define KEY_DOWN 80
 #define KEY_LEFT 75
 #define KEY_UP 72
+HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);

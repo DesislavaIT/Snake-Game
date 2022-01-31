@@ -25,7 +25,7 @@ int main()
 		snake[i] = new int[2];// for x & y
 	}
 
-	snake[5] = nullptr;
+	snake[length] = nullptr;
 
 	for (int i = length - 1, j = 0; i >= 0; i--, j++)
 	{
@@ -38,22 +38,6 @@ int main()
 	char oldKey = key; //initial direction is right
 	bool oppositeMessageShown = false;
 	int food[2];
-	/*srand(time(0));
-	int x = rand() % CONSOLE_WIDTH + 1;
-	while (!CheckFoodX(snake, length, x))
-	{
-		x = rand() % CONSOLE_WIDTH + 1;
-	}
-
-	int y = rand() % CONSOLE_HEIGHT + 1;
-	while (!CheckFoodY(snake, length, y))
-	{
-		y = rand() % CONSOLE_HEIGHT + 1;
-	}
-
-	food[0] = x;
-	food[1] = y;
-	ShowFood(food);*/
 	GenerateNewFood(snake, length, food);
 	int changeFood = 0;
 	while (true)
@@ -158,21 +142,6 @@ int main()
 		if (CheckIfFoodEaten(snake, length, food))
 		{
 			changeFood = 0;
-			/*x = rand() % CONSOLE_WIDTH + 1;
-			while (!CheckFoodX(snake, length, x))
-			{
-				x = rand() % CONSOLE_WIDTH + 1;
-			}
-
-			y = rand() % CONSOLE_HEIGHT + 1;
-			while (!CheckFoodY(snake, length, y))
-			{
-				y = rand() % CONSOLE_HEIGHT + 1;
-			}
-
-			food[0] = x;
-			food[1] = y;
-			ShowFood(food);*/
 			GenerateNewFood(snake, length, food);
 			length++;
 			if (length % SNAKE_LENGTH == 0)
@@ -181,7 +150,7 @@ int main()
 			}
 
 			ExtendSnake(snake, length, lastSnakePart);
-			timeSleep -= 4;
+			timeSleep -= 5;
 		}
 
 		changeFood++;
@@ -191,6 +160,7 @@ int main()
 			std::cout << ' ';
 			GenerateNewFood(snake, length, food);
 		}
+
 		ShowSnake(snake, length);
 		Sleep(timeSleep);
 	}

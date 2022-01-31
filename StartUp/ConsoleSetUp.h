@@ -61,24 +61,28 @@ void MakeCursorInvisible()
 
 void PrintFrame()
 {
-	for (int i = 0; i < CONSOLE_WIDTH; i++)
+	SetConsoleTextAttribute(handle, 14);
+	cout << (char)(219);
+	for (int i = 1; i < CONSOLE_WIDTH - 1; i++)
 	{
-		cout << '*';
+		cout << (char)(223);
 	}
-	cout << endl;
+	cout << (char)(219) << endl;
 
 	for (int j = 0; j < CONSOLE_HEIGHT - 2; j++)
 	{
-		cout << '*';
+		cout << (char)(219);
 		for (int i = 0; i < CONSOLE_WIDTH - 2; i++)
 		{
 			cout << ' ';
 		}
-		cout << '*' << endl;
+		cout << (char)(219) << endl;
 	}
 
-	for (int i = 0; i < CONSOLE_WIDTH; i++)
+	cout << (char)(219);
+	for (int i = 1; i < CONSOLE_WIDTH - 1; i++)
 	{
-		cout << '*';
+		cout << (char)(220);
 	}
+	cout << (char)(219);
 }

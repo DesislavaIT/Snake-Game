@@ -27,11 +27,18 @@ int** ResizeSnake(int** snake, int length)
 
 void ShowSnake(int** snake, int length)
 {
+	SetConsoleTextAttribute(handle, 2);
 	for (int i = length - 1; i >= 0; i--)
 	{
 		int x = snake[i][0];
 		int y = snake[i][1];
 		SetCursor(x, y);
+		/*if (i == 0)
+		{
+			cout << '@';
+			continue;
+		}*/
+
 		cout << '$';
 	}
 }
