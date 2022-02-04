@@ -24,6 +24,7 @@
     <ProjectGuid>{f37c83fb-eb60-4913-9f21-5d24fa4bf78f}</ProjectGuid>
     <RootNamespace>StartUp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Snake</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,7 +146,14 @@
     <ClInclude Include="ConsoleSetUp.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="FoodSetUp.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SnakeSetUp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StartUp.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\desis\Downloads\SnakeIcon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
